@@ -1,0 +1,119 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Was isch für Zit?</title>
+</head>
+<body>
+    <div id="app">
+        <div id="gridContainer">
+            <div class="controls flex-center">
+                <div 
+                class="option left"
+                :class="{highlighted: type == 'letters'}"
+                v-on:click="setType('letters')">abc</div>
+                <div 
+                class="option right"
+                :class="{highlighted: type == 'numbers'}"
+                v-on:click="setType('numbers')">123</div>
+            </div>
+            <div class="timeContainer flex-center" v-if="type == 'numbers'">
+                <span class="timeOutput numbers">{{time}}</span>
+            </div>
+            <div v-else class="timeContainer flex-center">
+                <span class="timeOutput fuzzy">{{fuzzyTime}}</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        hours = {
+            0: "Mitternacht",
+            1: "Eis",
+            2: "Zwöi",
+            3: "Drü",
+            4: "Vieri",
+            5: "Füfi",
+            6: "Sächsi",
+            7: "Sibni",
+            8: "Achti",
+            9: "Nüni",
+            10: "Zähni",
+            11: "Eufi",
+            12: "Mittag",
+            13: "Eis",
+            14: "Zwöi",
+            15: "Drü",
+            16: "Vieri",
+            17: "Füfi",
+            18: "Sächsi",
+            19: "Sibni",
+            20: "Achti",
+            21: "Nüni",
+            22: "Zähni",
+            23: "Eufi",
+            24: "Mitternacht"
+        }
+        minutes = {
+            0: "",
+            5: "Füf ab ",
+            10: "Zäh ab ",
+            15: "Viertu ab ",
+            20: "Zwänzg ab ",
+            25: "Füf vor Haubi ",
+            30: "Haubi ",
+            35: "Füf ab Haubi ",
+            40: "Zwänzg vor ",
+            45: "Viertu vor ",
+            50: "Zäh vor ",
+            55: "Füf vor ",
+            60: ""     
+        }
+
+        var maxValue = 120;
+        document.body.style.backgroundColor = `rgb(${Math.floor(Math.random() * maxValue)}, ${Math.floor(Math.random() * maxValue)}, ${Math.floor(Math.random() * maxValue)})`;
+
+        let ref = Vue.ref;
+        Vue.createApp({
+            setup() {
+                // ================================= time
+                var time = ref((new Date).toTimeString().substring(0, 8)); // current time
+                var fuzzyTime = ref(getFuzzyTime(time.value)); // current fuzzy time for startup
+
+                function getFuzzyTime(time) {
+                    var currentHour = parseInt(time.substring(0, 2));
+                    // round current minute to nearest multiple of 5
+                    var currentMinute = Math.round(parseInt(time.substring(3, 5)) / 5) * 5;
+                    if (currentMinute > 20) {
+                        currentHour += 1; // bärndütsch logic
+                    }
+                    return `${minutes[currentMinute]}${hours[currentHour]}`;
+                }
+
+                setInterval(() => {
+                    time.value = (new Date).toTimeString().substring(0, 8); // get time in number format
+                    fuzzyTime.value = getFuzzyTime(time.value); // calculate fuzzy time
+                    document.title = fuzzyTime.value;
+                }, 1000);
+
+                // ================================= type
+                var type = ref("letters"); // current type of time
+
+                function setType(newType) {
+                    type.value = newType;
+                }
+
+                // ================================= return
+                return {
+                    time,
+                    fuzzyTime,
+                    type,
+                    setType
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>

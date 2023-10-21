@@ -1,0 +1,64 @@
+:root {
+    --border-radius: 7px;
+    --shadow: 0.2vw;
+    --shadow-color: #e9e9e98a;
+}
+body {
+    overflow: hidden;
+    color: white;
+    mix-blend-mode: difference;
+    font-family: "Source Code Pro", consolas, sans-serif;
+    user-select: none;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.timeOutput {
+    transition: .3s;
+    text-shadow: var(--shadow) var(--shadow) var(--shadow-color);
+}
+.numbers {
+    font-size: 12vw;
+}
+.fuzzy {
+    text-align: center;
+    font-size: 8vw;
+}
+.fuzzy::before {
+    content: "es isch öbbe";
+    display: block;
+    font-size: 3vw;
+    text-shadow: 0.15vw 0.15vw var(--shadow-color) !important;
+}
+#gridContainer {
+    display: grid;
+    height: 99vh;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+}
+.timeContainer {
+    grid-area: 2 / 2 / 3 / 3;
+}
+.controls {
+    grid-column: 2 / 3;
+    font-size: 1.7vw;
+}
+.option {
+    background-color: #7d7d7d73;
+    margin: 0.1vw;
+    padding: 7px;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0.1vw 0.1vw var(--shadow-color);
+}
+.left {
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+.right {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+.highlighted {
+    background-color: #dcdcdc88;
+}
