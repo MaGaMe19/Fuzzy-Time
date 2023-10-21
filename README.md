@@ -1,4 +1,4 @@
-#Fuzzy Time (swiss german)
+# Fuzzy Time (swiss german)
 
 This webpage / python script indicates the current time in swiss german (bärndütsch). I don't know why I call this "fuzzy time", it just seemed fitting.
 
