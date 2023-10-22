@@ -360,7 +360,7 @@ def getFuzzyTime(time: datetime, oldTime: str) -> str:
 
     fuzzyTime = """"""
     for i in range(5):
-        fuzzyTime += f"{MINUTES[currentMinute][i]}{HOURS[currentHour][i]}\n"
+        fuzzyTime += f"    {MINUTES[currentMinute][i]}{HOURS[currentHour][i]}\n"
     
     return fuzzyTime if oldTime != fuzzyTime else "SAME"            
 
@@ -373,8 +373,8 @@ if __name__ == "__main__":
             cls()
             previousTime = fuzzyTime
 
-            print("Es isch öbbe")
+            print("\n    Es isch öbbe")
             print(fuzzyTime)
-            print(f"\nam {date.today().strftime('%d.%m.%y')}.")
+            print(f"\n    am {date.today().strftime('%d.%m.%y')}.")
 
         sleep(5)
