@@ -367,7 +367,8 @@ def getFuzzyTime(time: datetime, oldTime: str) -> str:
 if __name__ == "__main__":
     previousTime = ""
     while (True):
-        fuzzyTime = getFuzzyTime(datetime.now(), previousTime)
+        time = datetime.now()
+        fuzzyTime = getFuzzyTime(time, previousTime)
 
         if fuzzyTime != "SAME":
             cls()
@@ -376,5 +377,6 @@ if __name__ == "__main__":
             print("\n    Es isch öbbe\n")
             print(fuzzyTime)
             print(f"\n    am {date.today().strftime('%d.%m.%y')}.")
+            print("    Gang is bett!") if time.hour >= 23 or time.hour <= 2 else ...
 
         sleep(5)
