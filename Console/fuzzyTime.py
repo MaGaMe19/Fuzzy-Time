@@ -359,7 +359,7 @@ def getFuzzyTime(time: datetime, oldTime: str) -> str:
         currentHour += 1 # bärndütsch logic
 
     fuzzyTime = """"""
-    for i in range(5):
+    for i in range(6):
         fuzzyTime += f"    {MINUTES[currentMinute][i]}{HOURS[currentHour][i]}\n"
     
     return fuzzyTime if oldTime != fuzzyTime else "SAME"            
@@ -373,7 +373,7 @@ if __name__ == "__main__":
             cls()
             previousTime = fuzzyTime
 
-            print("\n    Es isch öbbe")
+            print("\n    Es isch öbbe\n")
             print(fuzzyTime)
             print(f"\n    am {date.today().strftime('%d.%m.%y')}.")
 
